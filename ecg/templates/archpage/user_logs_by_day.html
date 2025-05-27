@@ -1,0 +1,92 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<form method="get" style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+  <input type="text" name="q" value="{{ search_query }}" placeholder="Search by content..." class="vTextField" />
+  <button type="submit" class="search-button">Search</button>
+
+  {% if search_query %}
+    <a href="{% url 'admin_user_logs_by_date_view' log_date=log_date %}" class="reset-button">
+      Reset
+    </a>
+  {% endif %}
+</form>
+
+{% if entries %}
+  <form method="post" id="deleteForm">
+    {% csrf_token %}
+    <table border="1" cellspacing="0" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Preview</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %}
+        <tr>
+          <td>
+            <input type="checkbox" name="delete_files" value="{{ entry.filename }}">
+            <strong>{{ entry.filename }}</strong>
+          </td>
+          <td>
+            <pre style="max-height: 200px; overflow-y: auto;">{{ entry.content }}</pre>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- ✅ BOUTON DELETE GLOBALEMENT -->
+    <button type="submit" onclick="return confirm('Are you sure you want to delete selected files?')"
+            style="position: fixed; bottom: 30px; right: 30px; font-family: Arial, Helvetica, sans-serif;
+                   background-color: #dc3545; color: white; padding: 10px 20px;
+                   border: none; border-radius: 6px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                   transition: background-color 0.3s ease;">
+       Delete 
+    </button>
+  </form>
+{% else %}
+  <p>No log entries found.</p>
+{% endif %}
+{% endblock %}
+{% block extrahead %}
+<style>
+.search-button,
+.reset-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.search-button {
+  background-color: #1e90ff;
+  color: white;
+}
+.search-button:hover {
+  background-color: #1565c0;
+  color: #fff;
+}
+.reset-button {
+  background-color:  #1e90ff;
+  color: #fff;
+  text-decoration: none;
+}
+.reset-button:hover {
+  background-color:  #1565c0;
+  color: #fff;
+}
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #b02a37;
+}
+</style>
+{% endblock %}

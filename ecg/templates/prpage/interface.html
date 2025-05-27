@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiokey - Your Heart is Your Key</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- partie css-->
+     <style>
+        /* Cardiokey Modern Website Styles */
+
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* Base Styles and Variables */
+:root {
+    /* Colors */
+    --Primary-color: rgba(245, 247, 253, 0.9);
+    --Secondary-color: #5E7AB0;
+    --Third-color: #58B999;
+    --Fourth-color: #23324E;
+    --Fifth-color: #11141E;
+    --sixth-color: #F5F7FD;
+    --seventh-color: #777;
+    --white-color: #FFFFFF;
+
+    /* Font Size */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 2.3rem;
+    
+    /* Font weight */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Border radius */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+    --border-radius-circle: 50%;
+    
+    /* Site max width */
+    --site-max-width: 1300px;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Background Layer */
+.background-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.main-content {
+    position: relative;
+    z-index: 1;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+img {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: var(--Secondary-color);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    background: var(--Fourth-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--Fourth-color);
+    border: 2px solid var(--Secondary-color);
+    padding: 10px 28px;
+}
+
+.btn-secondary:hover {
+    background: var(--Secondary-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    color: var(--Fourth-color);
+    text-transform: uppercase;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--Secondary-color);
+    border-radius: 2px;
+}
+
+.section-title:hover {
+    color: var(--Secondary-color);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+/* Navigation */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--Fourth-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white-color);
+    gap: 10px;
+}
+
+.logo-text {
+    margin-right: 8px;
+}
+
+.logo-svg {
+    margin-right: 5px;
+    animation: pulse-logo 1.5s infinite;
+}
+
+.logo-heart-line {
+    animation: draw-line 3s ease-in-out infinite;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+}
+
+@keyframes draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes pulse-logo {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse-icon {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu li {
+    margin: 0 1rem;
+}
+
+.nav-menu a {
+    position: relative;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--white-color);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--Secondary-color);
+    transition: var(--transition);
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+    width: 100%;
+}
+
+.btn-login {
+    background: var(--Secondary-color);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+}
+
+.btn-login:hover {
+    background: var(--Third-color);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--white-color);
+}
+
+/* Hero Section */
+.hero {
+    padding: 180px 0 100px;
+    background: var(--Primary-color);
+    overflow: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(94, 122, 176, 0.1), rgba(94, 122, 176, 0.05));
+}
+
+.hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+    align-items: center;
+}
+
+.hero-content {
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--Fourth-color);
+}
+
+.highlight {
+    color: var(--Secondary-color);
+    position: relative;
+}
+
+.highlight::before {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(94, 122, 176, 0.2);
+    z-index: -1;
+    border-radius: 4px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--Fifth-color);
+    margin-bottom: 30px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.hero-image {
+    position: relative;
+}
+
+.ecg-animation {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.ecg-line {
+    width: 100%;
+    height: auto;
+}
+
+.ecg-path {
+    stroke: var(--Secondary-color);
+    stroke-width: 3px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 1500;
+    animation: draw-ecg 3s ease-in-out forwards infinite;
+}
+
+@keyframes draw-ecg {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Features Section */
+.features {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--Secondary-color);
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    background: var(--Secondary-color);
+    border-radius: 50%;
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--Fourth-color);
+}
+
+.feature-card p {
+    color: var(--Fifth-color);
+    font-size: 0.95rem;
+}
+
+/* How It Works */
+.how-it-works {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, #f9f9f9, #fff);
+}
+
+.steps {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 60px;
+    bottom: -60px;
+    width: 3px;
+    background: var(--Secondary-color);
+}
+
+.step-number {
+    min-width: 50px;
+    height: 50px;
+    background: var(--Secondary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-right: 25px;
+    z-index: 1;
+}
+
+.step-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--Fourth-color);
+}
+
+.step-content p {
+    color: var(--Fifth-color);
+}
+
+/* Demo Section */
+.demo {
+    padding: 100px 0;
+    background: linear-gradient(135deg, rgba(94, 122, 176, 0.1), rgba(94, 122, 176, 0.05));
+}
+
+.demo-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
+    align-items: center;
+}
+
+.demo-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--Fourth-color);
+}
+
+.demo-content p {
+    margin-bottom: 30px;
+    color: var(--Fifth-color);
+}
+
+.demo-form .form-group {
+    margin-bottom: 20px;
+}
+
+.demo-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--Fourth-color);
+}
+
+.demo-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.demo-form input:focus {
+    border-color: var(--Secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(94, 122, 176, 0.2);
+}
+
+.device-mockup {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.device-screen {
+    background: #f0f0f0;
+    border-radius: 12px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.device-sensor {
+    width: 80px;
+    height: 80px;
+    background: var(--Secondary-color);
+    border-radius: 50%;
+    margin-bottom: 30px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(94, 122, 176, 0.5);
+    animation: glow 2s infinite;
+}
+
+.device-sensor::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 20px rgba(94, 122, 176, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(94, 122, 176, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(94, 122, 176, 0.5);
+    }
+}
+
+.ecg-mini {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+}
+
+.ecg-mini-line {
+    width: 100%;
+    height: auto;
+}
+
+.ecg-mini-path {
+    stroke: var(--Secondary-color);
+    stroke-width: 3px;
+    fill: none;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: draw-mini-ecg 2s linear infinite;
+}
+
+@keyframes draw-mini-ecg {
+    0% {
+        stroke-dashoffset: 500;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* About Section */
+.about {
+    padding: 100px 0;
+    background: #fff;
+    min-height: 90vh;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
+    align-items: center;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    color: var(--Fifth-color);
+    line-height: 1.7;
+}
+
+.social-links, .social-link-list {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: flex-start;
+}
+
+.social-icon, .social-link {
+    width: 40px;
+    height: 40px;
+    background: var(--light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--Fourth-color);
+    font-size: var(--font-size-m);
+    transition: var(--transition);
+}
+
+.social-icon:hover, .social-link:hover {
+    background: var(--Secondary-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Contact Section */
+.contact {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, #f9f9f9, #fff);
+    min-height: 90vh;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.contact-icon {
+    min-width: 50px;
+    height: 50px;
+    background: var(--Secondary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 20px;
+    font-size: 1.2rem;
+}
+
+.contact-text h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--Fourth-color);
+}
+
+.contact-form form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea,
+.login-form .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.contact-form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.login-form .form-input:focus {
+    border-color: var(--Secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(94, 122, 176, 0.2);
+}
+
+/* Login Box Styles */
+.login-section {
+    padding: 50px 0;
+    background: var(--Primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-box {
+    background-color: var(--Fifth-color);
+    border-radius: 5px;
+    border: 2px solid var(--Secondary-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px;
+    height: 450px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.login-box:hover {
+    border-color: var(--Third-color);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.login-box-left {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--Secondary-color);
+    border-radius: 0 50px 50px 0;
+    padding: 40px 20px;
+}
+
+.login-box-left-title {
+    color: var(--white-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.login-box-left .login-box-left-title:hover {
+    color: var(--Fifth-color);
+}
+
+.login-desc {
+    color: var(--white-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.login-box-right {
+    width: 55%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-title {
+    color: var(--white-color);
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+.login-form .form-input {
+    margin-bottom: 25px;
+}
+
+.file-label {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #777;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+}
+
+.file-name {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--seventh-color);
+    margin: 5px 0 20px;
+}
+
+.real-file {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.login-form button, 
+.submit-button {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: var(--Secondary-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-form button:hover,
+.submit-button:hover {
+    background-color: var(--Fourth-color);
+    transform: translateY(-3px);
+}
+
+/* Footer */
+.footer {
+    background: var(--Fourth-color);
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.footer-links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links a {
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--Secondary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+/* Mobile Menu for Responsive */
+body.show-mobile-menu header::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    width: 100%;
+    max-width: 300px;
+    background: var(--Fourth-color);
+    padding: 20px;
+    border-radius: 0 0 0 10px;
+    z-index: 999;
+    display: none;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+body.show-mobile-menu .mobile-menu {
+    display: block;
+    transform: translateX(0);
+}
+
+.close-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--white-color);
+    text-align: right;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .login-box {
+        width: 90%;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .login-box-left, .login-box-right {
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .login-box-left {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 1.5rem 0;
+    }
+    
+    .hero .container,
+    .about-content,
+    .demo-container,
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero {
+        padding: 150px 0 80px;
+    }
+    
+    .hero-content {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .cta-buttons {
+        justify-content: center;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .about-image {
+        order: 1;
+    }
+    
+    .about-text {
+        order: 2;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .footer-links ul {
+        justify-content: center;
+    }
+
+    .logo {
+        margin-left: 0;
+    }
+
+    .menu-icon {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-box {
+        width: 95%;
+    }
+
+    .step {
+        flex-direction: column;
+    }
+
+    .step-number {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+
+    .step:not(:last-child)::after {
+        display: none;
+    }
+}
+.loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #2a5298;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+@keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+#cooldownMessage {
+      white-space: nowrap;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+    }
+
+ul.messages {
+      padding: 0;
+      list-style: none;
+      margin-top: 10px;
+    }
+
+ul.messages li {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+    }
+.footer {
+    background-color: #1c314d; /* ou var(--Fourth-color) */
+    padding: 40px 0;
+    color: white;
+    text-align: center;
+}
+
+.footer-contact h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-contact p {
+    margin: 6px 0;
+    font-size: 1rem;
+    color: white;
+}
+
+.footer-contact a {
+    color: #cfd8dc;
+    text-decoration: none;
+}
+
+.footer-contact a:hover {
+    color: #90caf9;
+    text-decoration: underline;
+}
+
+ 
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <svg class="logo-svg" width="30" height="30" viewBox="0 0 100 100">
+                    <path class="logo-heart-line" d="M10,50 L30,50 L40,30 L50,70 L60,30 L70,70 L80,50 L100,50" fill="none" stroke="#5E7AB0" stroke-width="5" />
+                    <path class="logo-heart" d="M50,30 C55,10 80,10 80,30 C80,60 50,80 50,80 C50,80 20,60 20,30 C20,10 45,10 50,30 Z" fill="#23324E" />
+                </svg>
+                <span class="logo-text">Cardiokey</span>
+                <span class="pulse-icon"><i class="fas fa-heartbeat"></i></span>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="{% url 'contact_page' %}" class="btn-login">Contact</a></li>
+                <li><a href="{% url 'demo' %}" class="btn-login">Login</a></li>
+                {% if request.user.is_staff %}
+                      <li><a href="wvaaUAHXmtoNAX-keL1B-w/" class="btn-login" style="background-color:#333;">Admin</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your heart is your <span class="highlight">key</span></h1>
+                <p class="hero-subtitle">Secure, contactless authentication powered by your unique cardiac signature</p>
+                <div class="cta-buttons">
+                    <a href="#" onclick="scrollToDemo()">Try a Demo</a>
+                    <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="ecg-animation">
+                    <svg viewBox="0 0 800 300" class="ecg-line">
+                        <polyline class="ecg-path" points="0,150 100,150 130,150 140,120 150,180 160,150 170,150 200,150 230,150 240,120 250,180 260,150 300,150 340,150 350,120 360,180 370,150 400,150 450,150 460,120 470,180 480,150 500,150 520,150 530,120 540,180 550,150 580,150 620,150 630,120 640,180 650,150 680,150 720,150 730,120 740,180 750,150 780,150 800,150"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Authentication</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3>Unique Biometric</h3>
+                    <p>Your cardiac rhythm is as unique as your fingerprint - but impossible to replicate.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Unmatched Security</h3>
+                    <p>Advanced ECG pattern recognition ensures the highest level of authentication security.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Contactless</h3>
+                    <p>No more touching shared surfaces - authenticate from a distance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Our machine learning algorithms adapt to subtle changes in your cardiac pattern over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Register Your Cardiac Pattern</h3>
+                        <p>Our device captures your unique ECG signature in just 5 seconds.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Secure Your Digital Identity</h3>
+                        <p>Your cardiac signature is encrypted and stored with the highest security protocols.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Effortless Authentication</h3>
+                        <p>Simply place your hand near the sensor for instant, contactless verification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://cdn.pixabay.com/photo/2020/02/05/09/13/stethoscope-4820535_640.jpg" alt="Medical technology innovation">
+                </div>
+                <div class="about-text">
+                    <p>At CardioKey, we believe that your identity should be both unique and secure. Our mission is to revolutionize authentication through the natural electrical rhythm of your heart.</p>
+                    <p>By combining medical-grade signal processing with advanced machine learning, we create seamless and contactless authentication solutions. Our team of scientists is building a future where identity is personal, protected, and truly biometric.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <svg class="logo-svg" width="30" height="30" viewBox="0 0 100 100">
+                        <path class="logo-heart-line" d="M10,50 L30,50 L40,30 L50,70 L60,30 L70,70 L80,50 L100,50" fill="none" stroke="#5E7AB0" stroke-width="5" />
+                        <path class="logo-heart" d="M50,30 C55,10 80,10 80,30 C80,60 50,80 50,80 C50,80 20,60 20,30 C20,10 45,10 50,30 Z" fill="#5E7AB0" />
+                    </svg>
+                    <span class="logo-text">CardioKey</span>
+                    <span class="pulse-icon"><i class="fas fa-heartbeat"></i></span>
+                </div>
+                <footer class="footer">
+                    <div class="footer-contact">
+                       <h2>Contact Us</h2>
+                            <p>📞 <strong>Phone:</strong> <a href="tel:+12134567890">+1 (213) 456-7890</a></p>
+                            <p>📧 <strong>Email:</strong> <a href="mailto:resf0896@gmail.com">resf0896@gmail.com</a></p>
+                            <p>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/12134567890" target="_blank">+1 (213) 456-7890</a></p>
+                 </div>
+              </footer>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 CardioKey. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+<script>
+  function scrollToDemo() {
+    const section = document.getElementById("demo");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+</script>
+
+    <!-- coté JavaScript --> 
+ <script>
+      window.addEventListener('DOMContentLoaded', () => {
+      // Safely retrieve the cooldown time remaining from the session.
+      const cooldownTimeRemaining = {{ request.session.cooldown_time_remaining|default:0 }};
+      const cooldownLoader = document.getElementById('cooldownLoader');
+      const cooldownMessage = document.getElementById('cooldownMessage');
+      const form = document.querySelector('form');
+      const errorMessages = document.getElementById('errorMessages');
+      
+      if (cooldownTimeRemaining > 0) {
+          // Hide form and show loader
+          cooldownLoader.style.display = 'block';
+          form.style.display = 'none';
+
+         let remainingTime = cooldownTimeRemaining;
+
+         function updateCountdown() {
+              cooldownMessage.textContent = `Please wait ${remainingTime}s before trying again.`;
+              if (remainingTime <= 0) {
+                 cooldownLoader.style.display = 'none';
+                 form.style.display = 'block';  // Show form again after cooldown
+                 errorMessages.style.display = 'block';  // Show error messages below the form
+            } else {
+                 remainingTime--;
+                 setTimeout(updateCountdown, 1000);
+                }
+            }
+
+         updateCountdown();
+      } else {
+        // If no cooldown time, show the form and error messages normally
+        errorMessages.style.display = 'block';
+        form.style.display = 'block';
+      }
+     });
+
+      //Show selected file name in interface
+     document.getElementById('fileUpload').addEventListener('change', function () {
+     const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+     document.getElementById('fileName').textContent = fileName;
+     });
+  </script>
+    <script>
+        // CardioKey Website JavaScript
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Toggle mobile navigation
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const body = document.body;
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            body.classList.toggle('show-mobile-menu');
+        });
+    }
+    
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            body.classList.remove('show-mobile-menu');
+        });
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Active link highlighting based on scroll position
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-menu a');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${current}`) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // Form submission handling with validation
+    const demoForm = document.querySelector('.demo-form');
+    if (demoForm) {
+        demoForm.addEventListener('submit', (e) => {
+            //e.preventDefault();
+            
+            // Simple validation
+            const matriculeInput = document.getElementById('demo-matricule');
+            const fileInput = document.getElementById('ecg-file');
+            let isValid = true;
+            
+            if (!matriculeInput.value.trim() || matriculeInput.value <= 0) {
+                isValid = false;
+                showError(matriculeInput, 'Positive matricule number is required');
+            } else {
+                removeError(matriculeInput);
+            }
+            
+            /*if (!fileInput.files || fileInput.files.length === 0) {
+                isValid = false;
+                const fileWrapper = fileInput.parentElement;
+                showError(fileWrapper, 'ECG ID file is required');
+            } else {
+                const fileWrapper = fileInput.parentElement;
+                removeError(fileWrapper);
+            }
+            
+            if (isValid) {
+                alert('Verification started! Please wait while we process your ECG signature.');
+                demoForm.reset();
+                document.getElementById('file-name').textContent = 'No ECG ID selected';
+            }*/
+        });
+    }
+    
+    // Add file input handling for login form if it exists
+    const fileInput = document.getElementById('ecg-file');
+    const fileName = document.getElementById('file-name');
+    
+    if (fileInput && fileName) {
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = fileInput.files[0].name;
+            } else {
+                fileName.textContent = 'No ECG ID selected';
+            }
+        });
+    }
+    
+    // Header scroll effect
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+        } else {
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        }
+    });
+    
+    // Utility functions for form validation
+    function showError(input, message) {
+        const formGroup = input.parentElement;
+        const errorElement = formGroup.querySelector('.error-message') || document.createElement('div');
+        errorElement.className = 'error-message';
+        errorElement.textContent = message;
+        
+        if (!formGroup.querySelector('.error-message')) {
+            input.style.borderColor = '#ff5252';
+            formGroup.appendChild(errorElement);
+        }
+    }
+    
+    function removeError(input) {
+        const formGroup = input.parentElement;
+        const errorElement = formGroup.querySelector('.error-message');
+        input.style.borderColor = '';
+        
+        if (errorElement) {
+            formGroup.removeChild(errorElement);
+        }
+    }
+    
+    function isValidEmail(email) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+    }
+});
+    </script>
+</body>
+</html>

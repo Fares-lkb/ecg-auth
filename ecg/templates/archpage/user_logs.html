@@ -1,0 +1,64 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<!-- ✅ Search Form -->
+<form method="get" style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+  <input type="text" name="q" value="{{ search_query }}" placeholder="Search by date..." class="vTextField" />
+  <button type="submit" class="search-button">Search</button>
+
+  {% if search_query %}
+    <a href="{% url 'admin_user_logs' %}" class="reset-button">
+      Reset
+    </a>
+  {% endif %}
+</form>
+
+
+<!-- ✅ Only show "User Log Archive" if not searching -->
+{% if not search_query %}
+  <h2>User Log Archive</h2>
+{% endif %}
+
+<!-- ✅ List folders or show message -->
+<ul>
+  {% if folders %}
+    {% for day in folders %}
+      <li><a href="{% url 'admin_user_logs_by_date_view' log_date=day %}">{{ day }}</a></li>
+    {% endfor %}
+  {% else %}
+    <p>No logs found for this date.</p>
+  {% endif %}
+</ul>
+
+{% endblock %}
+{% block extrahead %}
+<style>
+.search-button,
+.reset-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.search-button {
+  background-color: #1e90ff;
+  color: white;
+}
+.search-button:hover {
+  background-color: #1565c0;
+  color: #fff;
+}
+.reset-button {
+  background-color: #1e90ff;
+  color: white;
+  text-decoration: none;
+}
+.reset-button:hover {
+  background-color: #1565c0;
+  color: #fff;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+{% for entry in entries %}
+  <li>
+    <h4>{{ entry.filename }}</h4>
+    <pre style="font-size:14px; font-family:Cochin, Georgia, Times, 'Times New Roman', serif; color:rgb(144, 144, 255) background: #15798f; padding: 10px; border: 1px solid #ddd;">
+ {{ entry.content }}
+    </pre>
+        <form method="post" action="">
+      {% csrf_token %}
+      <input type="hidden" name="delete_filename" value="{{ entry.filename }}">
+      <button type="submit" class="delete-btn">
+         Delete
+      </button>
+    </form>
+  </li>
+{% endfor %}
+<style>
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn:hover {
+  background-color: #b02a37;
+  transform: translateY(-1px);
+}
+</style>
+{% endblock %}
+

@@ -1,0 +1,26 @@
+/* ✅ Style et position du bouton "Add User" */
+.change-list .object-tools {
+  position: absolute;
+  right: 40px;
+  top: 90px;
+  z-index: 10;
+}
+
+.change-list .object-tools .addlink {
+  background-color: #1e90ff;
+  color: white !important;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.change-list .object-tools .addlink:hover {
+  background-color: #1565c0;
+  transform: scale(1.05);
+  color: white !important;
+}

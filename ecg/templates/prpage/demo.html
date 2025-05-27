@@ -1,0 +1,382 @@
+<style>
+/* Cardiokey Modern Website Styles */
+
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* Base Styles and Variables */
+:root {
+    /* Colors */
+    --Primary-color: rgba(245, 247, 253, 0.9);
+    --Secondary-color: #5E7AB0;
+    --Third-color: #58B999;
+    --Fourth-color: #23324E;
+    --Fifth-color: #11141E;
+    --sixth-color: #F5F7FD;
+    --seventh-color: #777;
+    --white-color: #FFFFFF;
+
+    /* Font Size */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 2.3rem;
+    
+    /* Font weight */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Border radius */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+    --border-radius-circle: 50%;
+    
+    /* Site max width */
+    --site-max-width: 1300px;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --Secondary-color: #5E7AB0;
+    --Fourth-color: #23324E;
+    --Fifth-color: #11141E;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease-in-out;
+    --white-color: #FFFFFF;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #fff;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--Fourth-color);
+    text-transform: uppercase;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: var(--Secondary-color);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    background: var(--Fourth-color);
+    transform: translateY(-3px);
+}
+
+.demo {
+    padding: 50px 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(94, 122, 176, 0.1), rgba(94, 122, 176, 0.05));
+}
+
+.demo-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.demo-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--Fourth-color);
+}
+
+.demo-content p {
+    margin-bottom: 30px;
+    color: var(--Fifth-color);
+}
+
+.demo-form .form-group {
+    margin-bottom: 20px;
+}
+
+.demo-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--Fourth-color);
+}
+
+.demo-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.demo-form input:focus {
+    border-color: var(--Secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(94, 122, 176, 0.2);
+}
+
+.device-mockup {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.device-screen {
+    background: #f0f0f0;
+    border-radius: 12px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.file-label {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #777;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+}
+
+.file-name {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--seventh-color);
+    margin: 5px 0 20px;
+}
+
+.real-file {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.device-sensor {
+    width: 80px;
+    height: 80px;
+    background: var(--Secondary-color);
+    border-radius: 50%;
+    margin-bottom: 30px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(94, 122, 176, 0.5);
+    animation: glow 2s infinite;
+}
+
+.device-sensor::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 20px rgba(94, 122, 176, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(94, 122, 176, 0.8); }
+    100% { box-shadow: 0 0 20px rgba(94, 122, 176, 0.5); }
+}
+
+.ecg-mini {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+}
+
+.ecg-mini-line {
+    width: 100%;
+    height: auto;
+}
+
+.ecg-mini-path {
+    stroke: var(--Secondary-color);
+    stroke-width: 3px;
+    fill: none;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: draw-mini-ecg 2s linear infinite;
+}
+
+@keyframes draw-mini-ecg {
+    0% { stroke-dashoffset: 500; }
+    100% { stroke-dashoffset: 0; }
+}
+
+ul.messages {
+    padding: 0;
+    list-style: none;
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+    text-align: center;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #2a5298;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+ul.messages {
+    padding: 0;
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    color: red;
+    font-size: 14px;
+    text-align: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
+    <section id="demo" class="demo">
+        <div class="container">
+            <h2 class="section-title">Experience CardioKey</h2>
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h3>Try Our Verification Demo</h3>
+                    <p>See how CardioKey's authentication works in real-time</p>
+                    <a id="no-scroll-anchor"></a>
+                    <form class="demo-form" id="infoForm" method="POST" enctype="multipart/form-data"  action="{% url 'demo' %}">
+                       {% csrf_token %}
+                        <div class="form-group">
+                            <label for="demo-matricule">Matricule</label>
+                            <input type="number" name="matricule" id="demo-matricule" min="0" placeholder="Enter your matricule" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ecg-file" class="file-label">📁 Enter your ECG ID</label>
+                            <input type="file" id="ecg-file" class="real-file" accept=".txt" name="fileupload" >
+                            <span class="file-name" id="file-name">No ECG ID selected</span>
+                        </div>
+                        {% if messages %}
+                             <ul class="messages">
+                                   {% for message in messages %}
+                                         <li>{{ message }}</li>
+                                   {% endfor %}
+                             </ul>
+                        {% endif %}
+                        <br>
+                        <button type="submit" class="btn btn-primary">Start Demo</button>
+                    </form>
+                    <div id="cooldownLoader" style="display:none; text-align: center; margin-top: 20px;">
+                     <div class="loader"></div>
+                     <p id="cooldownMessage"></p>
+                    </div>
+                </div>
+                <div class="demo-visual">
+                    <div class="device-mockup">
+                        <div class="device-screen">
+                            <div class="device-sensor"></div>
+                            <div class="ecg-mini">
+                                <svg viewBox="0 0 400 150" class="ecg-mini-line">
+                                    <polyline class="ecg-mini-path" points="0,75 50,75 65,75 75,45 85,105 95,75 110,75 150,75 165,75 175,45 185,105 195,75 220,75 250,75"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.getElementById('ecg-file');
+    const fileName = document.getElementById('file-name');
+
+    if (fileInput && fileName) {
+        fileInput.addEventListener('change', () => {
+            fileName.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : 'No ECG ID selected';
+        });
+    }
+
+    const cooldownTimeRemaining = {{ request.session.cooldown_time_remaining|default:0 }};
+    const cooldownLoader = document.getElementById('cooldownLoader');
+    const cooldownMessage = document.getElementById('cooldownMessage');
+    const form = document.querySelector('#infoForm');
+
+    if (cooldownTimeRemaining > 0 && cooldownLoader && cooldownMessage && form) {
+        cooldownLoader.style.display = 'block';
+        form.style.display = 'none';
+
+        let remainingTime = cooldownTimeRemaining;
+
+        function updateCountdown() {
+            cooldownMessage.textContent = `Please wait ${remainingTime}s before trying again.`;
+            if (remainingTime <= 0) {
+                cooldownLoader.style.display = 'none';
+                form.style.display = 'block';
+            } else {
+                remainingTime--;
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+
+        updateCountdown();
+    }
+});
+</script>

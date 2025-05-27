@@ -1,0 +1,82 @@
+{% extends "admin/base_site.html" %}
+{% load static admin_urls log %}
+
+{% block content %}
+  <!-- 🎯 Message central de bienvenue (sans menu à droite) -->
+  <div class="custom-welcome-bar">
+      <h1>Welcome, {{ request.user.username }}</h1>
+  </div>
+
+  <!-- 🌟 ECG Log Viewer (only for Normal Admins) -->
+  {% if not request.user.is_superuser %}
+    <hr>
+    <h2 style="margin-top: 2rem; font-size: 22px; color: rgb(154, 178, 253);">
+      ECG Log Viewer
+    </h2>
+
+    <!-- 🔘 View All Button -->
+    <div style="margin-bottom: 20px;">
+      <a href="{% url 'admin_user_logs' %}" class="button"
+         style="
+           padding: 10px 16px;
+           background: black;
+           color: rgb(154, 178, 253);
+           border: 1px solid white;
+           border-radius: 6px;
+         ">
+        📁 View All Log Folders
+      </a>
+    </div>
+
+    <!-- 📅 Timeline de logs récents -->
+    <div>
+      <h3 style="margin-bottom: 10px; color: rgb(154, 178, 253);">
+        📅 Quick Access to Recent Days
+      </h3>
+      {% if recent_days %}
+        <div class="timeline">
+          {% for day in recent_days %}
+            <div class="timeline-item">
+              📄 {{ day }} – 
+              <a href="{% url 'admin_user_logs_by_date_view' log_date=day %}">
+                View Logs
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p style="color:rgb(154, 178, 253);">No recent log folders found.</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <!-- 👑 Admin Management Section -->
+  {% if admin_management %}
+    <hr>
+    <h2 style="color:rgb(154, 178, 253);">👑 Admin Management</h2>
+    <ul>
+      {% for model in admin_management %}
+        <li>
+          <a href="{{ model.admin_url }}" style="color: rgb(154, 178, 253);">
+            {{ model.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- 👥 User Management Section -->
+  {% if user_management %}
+<h2 style="color: var(--text-color, rgb(154, 178, 253));">👥 User Management</h2>
+<ul>
+  {% for model in user_management %}
+    <li>
+      <a href="{{ model.admin_url }}" style="color: var(--text-color,  rgb(103, 123, 236));">
+        {{ model.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
+  {% endif %}
+{% endblock %}

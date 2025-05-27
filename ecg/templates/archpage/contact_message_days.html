@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <!-- ✅ Barre de recherche -->
+<form method="get" style="margin-bottom: 20px; display: flex; gap: 10px;">
+  <input type="text" name="q" placeholder="Search by date..." value="{{ request.GET.q }}" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc;">
+  
+  <button type="submit" style="
+      padding: 6px 14px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease;">Search</button>
+  
+  <a href="{% url 'admin:contactmessage_by_day' %}" style="
+      padding: 6px 14px;
+      background-color: #6c757d;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;"
+     onmouseover="this.style.backgroundColor='#5a6268'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.15)'"
+     onmouseout="this.style.backgroundColor='#6c757d'; this.style.boxShadow='none'">Reset</a>
+</form>
+  <ul>
+    {% for day in folders %}
+      <li><a href="{% url 'admin:contactmessage_by_date' day %}">{{ day }}</a></li>
+    {% empty %}
+      <li>No folders found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

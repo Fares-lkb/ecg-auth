@@ -1,0 +1,11 @@
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label>Utilisateur ID :</label>
+  <input type="number" name="id" min="1" max="190" required><br><br>
+
+  <label>Fichier ECG (.txt) :</label>
+  <input type="file" name="ecg_file" accept=".txt" required><br><br>
+
+  <input type="submit" value="Vérifier">
+  {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+</form>

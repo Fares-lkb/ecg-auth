@@ -1,0 +1,272 @@
+  <style>
+  /* Cardiokey Modern Website Styles */
+
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* Base Styles and Variables */
+:root {
+    /* Colors */
+    --Primary-color: rgba(245, 247, 253, 0.9);
+    --Secondary-color: #5E7AB0;
+    --Third-color: #58B999;
+    --Fourth-color: #23324E;
+    --Fifth-color: #11141E;
+    --sixth-color: #F5F7FD;
+    --seventh-color: #777;
+    --white-color: #FFFFFF;
+
+    /* Font Size */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 2.3rem;
+    
+    /* Font weight */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Border radius */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+    --border-radius-circle: 50%;
+    
+    /* Site max width */
+    --site-max-width: 1300px;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --Primary-color: rgba(245, 247, 253, 0.9);
+    --Secondary-color: #5E7AB0;
+    --Fourth-color: #23324E;
+    --Fifth-color: #11141E;
+    --white-color: #FFFFFF;
+    --seventh-color: #777;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease-in-out;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    color: var(--Fourth-color);
+    text-transform: uppercase;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--Secondary-color);
+    border-radius: 2px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: var(--Secondary-color);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    background: var(--Fourth-color);
+    transform: translateY(-3px);
+}
+
+/* Contact Section */
+.contact {
+    padding: 50px 0;
+    background: linear-gradient(to bottom, #f9f9f9, #fff);
+    min-height: 90vh;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 45px;
+}
+.contact-info{
+    margin-left: 50px;
+    margin-top: 15px;
+}
+.contact-icon {
+    min-width: 50px;
+    height: 50px;
+    background: var(--Secondary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 20px;
+    font-size: 1.2rem;
+}
+
+.contact-text h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--Fourth-color);
+}
+.contact-form{
+    margin-right: 55px;
+}
+.contact-form form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.contact-form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--Secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(94, 122, 176, 0.2);
+}
+</style>
+
+   <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p>admin@cardiokey.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Phone</h3>
+                            <p>+1 (213) 456-7890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Website</h3>
+                            <p>www.cardiokey.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                  <form method="POST" action="{% url 'contact_page' %}">
+                      {% csrf_token %}
+                      <div class="form-group">
+                         <input type="text" name="name" placeholder="Your Name" required>
+                      </div>
+                      <div class="form-group">
+                         <input type="email" name="email" placeholder="Your Email" required>
+                      </div>
+                     <div class="form-group">
+                         <textarea name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                         {% if from_contact %}
+                              {% if messages %}
+                                  <ul class="messages">
+                                     {% for message in messages %}
+                                         <li>{{ message }}</li>
+                                     {% endfor %}
+                                  </ul>
+                              {% endif %}
+                         {% endif %}
+                         <button type="submit" class="btn btn-primary">Send Message</button>
+                   </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.contact-form form');
+    const inputs = form.querySelectorAll('input, textarea');
+
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.style.borderColor = '#5E7AB0';
+        });
+        input.addEventListener('blur', () => {
+            input.style.borderColor = '#ddd';
+        });
+    });
+});
+</script>
