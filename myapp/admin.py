@@ -7,7 +7,7 @@ from django.contrib.auth.admin import GroupAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 import os
 from django.contrib.admin import AdminSite
-from .models import UserDB, ECGRecord
+from .models import UserDB, ECGRecord, SVMModels
 from .forms import UserWithECGForm
 
 class CustomAdminSite(AdminSite):
@@ -92,7 +92,7 @@ class CustomGroupAdmin(GroupAdmin):
     
 class UserWithECGAdmin(admin.ModelAdmin):
     form = UserWithECGForm
-    list_display = ('first_name', 'last_name', 'matricule')
+    list_display = ('user_id','first_name', 'last_name', 'matricule')
 
     def has_module_permission(self, request):
         print("🔍 User:", request.user)
@@ -155,7 +155,7 @@ class InfoAdmin(admin.ModelAdmin):
 
 # 🛡 Custom Admin for UserDB (Users Database) — only StaffAdmins
 class UserDBAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'first_name', 'last_name', 'matricule')
+    list_display = ('first_name', 'last_name', 'matricule')
     
     class Media:
         css = {
@@ -183,11 +183,15 @@ class UserDBAdmin(admin.ModelAdmin):
         if request.path.endswith('/userdb/'):
             return True
         return False
-    
+@admin.register(SVMModels)
+class SVMModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nom',)  # Remplace par les champs de ton modèle
+    search_fields = ('nom',)   
 # 🔄 Unregister default User and Group and Register with Custom Admins
 admin.site.unregister(User)
 admin.site.unregister(Group)
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(User, CustomUserAdmin) 
+admin.site.register(ECGRecord)
 admin.site.register(Group, CustomGroupAdmin)
 # 📋 Custom Admin Homepage (dex.html)
 from django.shortcuts import redirect

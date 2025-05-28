@@ -60,6 +60,7 @@ class UserProfile(models.Model):
 
 class SVMModels(models.Model):
     nom = models.CharField(max_length=50)
+    ecg = models.OneToOneField(ECGRecord, on_delete=models.CASCADE, blank=True,null=True)
     fichier_svm = models.FileField(upload_to="svm/")
 
 @receiver(post_save, sender=User)

@@ -1,11 +1,42 @@
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <label>Utilisateur ID :</label>
-  <input type="number" name="id" min="1" max="190" required><br><br>
+{% load static %}
+<link rel="stylesheet" href="{% static 'myapp/style.css' %}">
+<section id="demo" class="demo">
+  <div class="container">
+      <h2 class="section-title">Experience CardioKey</h2>
+      <div class="demo-container">
+        <div class="demo-content">
+          <form method="POST" enctype="multipart/form-data" class="demo-form" id="infoForm">
+              {% csrf_token %}
+              <div class="form-group">
+                   <label for="demo-matricule">Utilisateur ID :</label>
+                   <input type="number" id="demo-matricule" name="id" min="1" max="190" placeholder="Enter your matricule" required><br><br>
+              </div> 
+              <div class="form-group">
+                 <label for="ecg-file" class="file-label"> 📁 Enter Your Fichier ECG (.txt) :</label>
+                 <input type="file" id="ecg-file" class="real-file" name="ecg_file" accept=".txt" required><br><br>
+              </div>
 
-  <label>Fichier ECG (.txt) :</label>
-  <input type="file" name="ecg_file" accept=".txt" required><br><br>
+              <button type="submit" class="btn btn-primary">Start Demo</button>
+              {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+         </form>
+                <div id="cooldownLoader" style="display:none; text-align: center; margin-top: 20px;">
+                     <div class="loader"></div>
+                        <p id="cooldownMessage"></p>
+                    </div>
+                </div>
+                <div class="demo-visual">
+                    <div class="device-mockup">
+                        <div class="device-screen">
+                            <div class="device-sensor"></div>
+                            <div class="ecg-mini">
+                                <svg viewBox="0 0 400 150" class="ecg-mini-line">
+                                    <polyline class="ecg-mini-path" points="0,75 50,75 65,75 75,45 85,105 95,75 110,75 150,75 165,75 175,45 185,105 195,75 220,75 250,75"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+      </div>         </div>
+    </div>             
+  </div>            
+</section>
 
-  <input type="submit" value="Vérifier">
-  {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
-</form>

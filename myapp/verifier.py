@@ -5,7 +5,7 @@ import neurokit2 as nk
 from scipy.signal import butter, filtfilt
 from sklearn.preprocessing import StandardScaler
 from django.shortcuts import render
-from .models import SVMModels
+from .models import SVMModels, UserDB, ECGRecord
 from django.core.files.storage import default_storage
 import os
 
@@ -26,19 +26,38 @@ def extract_dwt_features(signal, wavelet='db4', level=3):
     return np.concatenate([A3, D3, D2])
 
 
+def create_ecg(preprocessed_file, user_id, svm_name):
+    try:
+        matricule = str(user_id).zfill(6)
+        user = UserDB.objects.filter(matricule=matricule).first()
+        if not user:
+            print(f"Utilisateur avec matricule {matricule} introuvable.")
+            return
+
+        ecg = ECGRecord.objects.create(user=user, ecg_file=preprocessed_file)
+
+        svm = SVMModels.objects.filter(nom=svm_name).first()
+        if svm:
+            svm.ecg = ecg
+            svm.save()
+    except Exception as e:
+        print("Erreur lors de l'enregistrement ECG :", e)
+
+
 def ecg_authentication_view(request):
     if request.method == "POST":
-        user_id = request.POST.get("id")  # ex: "14"
+        user_id = request.POST.get("id")
         ecg_file = request.FILES.get("ecg_file")
 
         if not user_id or not ecg_file:
-            return render(request, "auth_form.html", {"error": "ID et fichier requis."})
+            return render(request, "auth_form.html", {"error": "ID et fichier ECG requis."})
 
-        # Sauvegarder temporairement le fichier
+        # Sauvegarder le fichier temporairement
         ecg_path = default_storage.save("tmp/" + ecg_file.name, ecg_file)
         ecg_path = os.path.join(default_storage.location, ecg_path)
 
         try:
+            # Prétraitement du signal
             signal = np.loadtxt(ecg_path)
             filtered = bandpass_filter(signal)
             _, info = nk.ecg_process(filtered, sampling_rate=FS)
@@ -47,28 +66,37 @@ def ecg_authentication_view(request):
             r = rpeaks[1]
             start = r - RADIUS
             end = r + (227 - RADIUS)
-
             if start < 0 or end > len(filtered):
-                raise ValueError("Battement hors limites.")
+                raise ValueError("Battement ECG hors limites.")
 
             beat = filtered[start:end]
             beat = (beat - np.mean(beat)) / (np.std(beat) + 1e-8)
             features = extract_dwt_features(beat).reshape(1, -1)
 
-            # Charger le scaler
-            scaler_path = os.path.join("scaler_dwt.pkl")
-            scaler = joblib.load(scaler_path)
+            # Standardisation
+            scaler = joblib.load("scaler_dwt.pkl")
             features_z = scaler.transform(features)
 
-            # Trouver le modèle dans la base Django
+            # Chargement du modèle SVM
             model_name = f"svm_id_{int(user_id) - 1:03d}.pkl"
             model_entry = SVMModels.objects.get(nom=model_name)
             model = joblib.load(model_entry.fichier_svm.path)
 
+            # Prédiction
             score = model.decision_function(features_z)[0]
             result = "accepté" if score >= SEUIL else "rejeté"
 
-            return render(request, "auth_result.html", {
+            # Sauvegarder le battement filtré dans un fichier temporaire
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".txt", mode='w') as tmpfile:
+                np.savetxt(tmpfile, beat)
+                tmpfile.flush()
+                tmpfile_path = tmpfile.name
+
+            with open(tmpfile_path, 'rb') as f:
+                django_file = File(f)
+                create_ecg(django_file, user_id, model_name)
+
+            return render(request, "wlpage/Welcome.html", {
                 "score": score,
                 "result": result,
                 "seuil": SEUIL
