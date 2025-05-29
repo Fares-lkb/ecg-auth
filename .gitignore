@@ -1,0 +1,11 @@
+/media/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# vs code configuration folder
+.vscode
+.idea
+# Django logs and debug files:
+*.log

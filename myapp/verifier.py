@@ -8,6 +8,8 @@ from django.shortcuts import render
 from .models import SVMModels, UserDB, ECGRecord
 from django.core.files.storage import default_storage
 import os
+import tempfile
+from django.core.files import File
 
 FS = 250
 RADIUS = 100
@@ -16,11 +18,11 @@ SEUIL = 0.0395
 
 def bandpass_filter(signal, low=0.5, high=40, fs=250, order=5):
     nyq = 0.5 * fs
-    b, a = butter(order, [low/nyq, high/nyq], btype='band')
+    b, a = butter(order, [low / nyq, high / nyq], btype="band")
     return filtfilt(b, a, signal)
 
 
-def extract_dwt_features(signal, wavelet='db4', level=3):
+def extract_dwt_features(signal, wavelet="db4", level=3):
     coeffs = pywt.wavedec(signal, wavelet, level=level)
     A3, D3, D2, D1 = coeffs
     return np.concatenate([A3, D3, D2])
@@ -33,6 +35,10 @@ def create_ecg(preprocessed_file, user_id, svm_name):
         if not user:
             print(f"Utilisateur avec matricule {matricule} introuvable.")
             return
+
+        # Ensure the file has a valid name
+        if not hasattr(preprocessed_file, "name") or not preprocessed_file.name:
+            preprocessed_file.name = f"ecg_user_{matricule}.txt"
 
         ecg = ECGRecord.objects.create(user=user, ecg_file=preprocessed_file)
 
@@ -50,7 +56,9 @@ def ecg_authentication_view(request):
         ecg_file = request.FILES.get("ecg_file")
 
         if not user_id or not ecg_file:
-            return render(request, "auth_form.html", {"error": "ID et fichier ECG requis."})
+            return render(
+                request, "auth_form.html", {"error": "ID et fichier ECG requis."}
+            )
 
         # Sauvegarder le fichier temporairement
         ecg_path = default_storage.save("tmp/" + ecg_file.name, ecg_file)
@@ -86,21 +94,53 @@ def ecg_authentication_view(request):
             score = model.decision_function(features_z)[0]
             result = "accepté" if score >= SEUIL else "rejeté"
 
-            # Sauvegarder le battement filtré dans un fichier temporaire
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".txt", mode='w') as tmpfile:
-                np.savetxt(tmpfile, beat)
-                tmpfile.flush()
-                tmpfile_path = tmpfile.name
+            # Retrieve user info
+            matricule = str(user_id).zfill(6)
+            user = UserDB.objects.filter(matricule=matricule).first()
 
-            with open(tmpfile_path, 'rb') as f:
-                django_file = File(f)
-                create_ecg(django_file, user_id, model_name)
+            if result == "accepté":
+                # Sauvegarder le battement filtré dans MEDIA/tmp/
+                filename = f"ecg_filtered_{user_id}.txt"
+                media_tmp_path = os.path.join("tmp", filename)
+                full_tmp_path = os.path.join(default_storage.location, media_tmp_path)
+                os.makedirs(os.path.dirname(full_tmp_path), exist_ok=True)
+                np.savetxt(full_tmp_path, beat)
 
-            return render(request, "wlpage/Welcome.html", {
-                "score": score,
-                "result": result,
-                "seuil": SEUIL
-            })
+                # Sauvegarder dans la base de données
+                with tempfile.NamedTemporaryFile(
+                    delete=False, suffix=".txt", mode="w"
+                ) as tmpfile:
+                    np.savetxt(tmpfile, beat)
+                    tmpfile.flush()
+                    tmpfile_path = tmpfile.name
+
+                with open(tmpfile_path, "rb") as f:
+                    django_file = File(f)
+                    django_file.name = f"ecg_user_{user_id}.txt"
+                    create_ecg(django_file, user_id, model_name)
+
+                default_storage.delete(media_tmp_path)
+
+                return render(
+                    request,
+                    "wlpage/Welcome.html",
+                    {
+                        "score": score,
+                        "result": result,
+                        "seuil": SEUIL,
+                        "user_matricule": user.matricule if user else "",
+                        "user_first_name": user.first_name if user else "",
+                        "user_last_name": user.last_name if user else "",
+                    },
+                )
+            else:
+                return render(
+                    request,
+                    "auth_form.html",
+                    {
+                        "error": f"Authentification rejetée. Score : {score:.4f}, Seuil : {SEUIL}"
+                    },
+                )
 
         except Exception as e:
             return render(request, "auth_form.html", {"error": str(e)})

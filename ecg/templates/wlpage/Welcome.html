@@ -1,590 +1,597 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CardioKey- User Profile</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-</head>
-<style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CardioKey- User Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <style>
+    /*  import google fonts */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap");
 
-  /*  import google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-}
-html{
-    scroll-behavior: smooth;
-}
+    /* custom scroll bar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
 
-/* custom scroll bar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-    background: #888;
-}
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
+    /* all similar content styling codes */
+    section {
+      padding: 100px 0;
+    }
+    .max-width {
+      max-width: 1300px;
+      padding: 0 80px;
+      margin: auto;
+    }
+    .about,
+    .services,
+    .skills,
+    .teams,
+    .contact,
+    footer {
+      font-family: "Poppins", sans-serif;
+    }
+    .about .about-content,
+    .services .serv-content,
+    .skills .skills-content,
+    .contact .contact-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    section .title {
+      position: relative;
+      text-align: center;
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 60px;
+      padding-bottom: 20px;
+      font-family: "Ubuntu", sans-serif;
+    }
+    section .title::before {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      left: 50%;
+      width: 180px;
+      height: 3px;
+      background: #111;
+      transform: translateX(-50%);
+    }
+    section .title::after {
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      font-size: 20px;
+      color: #5e7ab0;
+      padding: 0 5px;
+      background: #fff;
+      transform: translateX(-50%);
+    }
 
-/* all similar content styling codes */
-section{
-    padding: 100px 0;
-}
-.max-width{
-    max-width: 1300px;
-    padding: 0 80px;
-    margin: auto;
-}
-.about, .services, .skills, .teams, .contact, footer{
-    font-family: 'Poppins', sans-serif;
-}
-.about .about-content,
-.services .serv-content,
-.skills .skills-content,
-.contact .contact-content{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-}
-section .title{
-    position: relative;
-    text-align: center;
-    font-size: 40px;
-    font-weight: 500;
-    margin-bottom: 60px;
-    padding-bottom: 20px;
-    font-family: 'Ubuntu', sans-serif;
-}
-section .title::before{
-    content: "";
-    position: absolute;
-    bottom: 0px;
-    left: 50%;
-    width: 180px;
-    height: 3px;
-    background: #111;
-    transform: translateX(-50%);
-}
-section .title::after{
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    font-size: 20px;
-    color: #5E7AB0;
-    padding: 0 5px;
-    background: #fff;
-    transform: translateX(-50%);
-}
+    /* navbar styling */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      z-index: 999;
+      padding: 30px 0;
+      font-family: "Ubuntu", sans-serif;
+      transition: all 0.3s ease;
+    }
+    .navbar.sticky {
+      padding: 15px 0;
+      background: rgb(31, 20, 186);
+    }
+    .navbar .max-width {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar .logo {
+      color: #32248f;
+      font-size: 35px;
+      font-weight: 600;
+    }
+    .navbar .logo a span {
+      color: #5e7ab0;
+      transition: all 0.3s ease;
+    }
+    .navbar.sticky .logo a span {
+      color: #fff;
+    }
+    .navbar .menu li {
+      list-style: none;
+      display: inline-block;
+    }
+    .navbar .menu li a {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      margin-left: 25px;
+      transition: color 0.3s ease;
+    }
+    .navbar .menu li a:hover {
+      color: #5e7ab0;
+    }
+    .navbar.sticky .menu li a:hover {
+      color: #fff;
+    }
 
-/* navbar styling */
-.navbar{
-    position: fixed;
-    width: 100%;
-    z-index: 999;
-    padding: 30px 0;
-    font-family: 'Ubuntu', sans-serif;
-    transition: all 0.3s ease;
-}
-.navbar.sticky{
-    padding: 15px 0;
-    background: rgb(31, 20, 186);
-}
-.navbar .max-width{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.navbar .logo {
-    color: #32248f;
-    font-size: 35px;
-    font-weight: 600;
-}
-.navbar .logo a span{
-    color: #5E7AB0;
-    transition: all 0.3s ease;
-}
-.navbar.sticky .logo a span{
-    color: #fff;
-}
-.navbar .menu li{
-    list-style: none;
-    display: inline-block;
-}
-.navbar .menu li a{
-    display: block;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    margin-left: 25px;
-    transition: color 0.3s ease;
-}
-.navbar .menu li a:hover{
-    color: #5E7AB0;
-}
-.navbar.sticky .menu li a:hover{
-    color: #fff;
-}
+    /* menu btn styling */
+    .menu-btn {
+      color: #fff;
+      font-size: 23px;
+      cursor: pointer;
+      display: none;
+    }
+    .scroll-up-btn {
+      position: fixed;
+      height: 45px;
+      width: 42px;
+      background: #5e7ab0;
+      right: 30px;
+      bottom: 10px;
+      text-align: center;
+      line-height: 45px;
+      color: #fff;
+      z-index: 9999;
+      font-size: 30px;
+      border-radius: 6px;
+      border-bottom-width: 2px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .scroll-up-btn.show {
+      bottom: 30px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .scroll-up-btn:hover {
+      filter: brightness(90%);
+    }
 
-/* menu btn styling */
-.menu-btn{
-    color: #fff;
-    font-size: 23px;
-    cursor: pointer;
-    display: none;
-}
-.scroll-up-btn{
-    position: fixed;
-    height: 45px;
-    width: 42px;
-    background: #5E7AB0;
-    right: 30px;
-    bottom: 10px;
-    text-align: center;
-    line-height: 45px;
-    color: #fff;
-    z-index: 9999;
-    font-size: 30px;
-    border-radius: 6px;
-    border-bottom-width: 2px;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-.scroll-up-btn.show{
-    bottom: 30px;
-    opacity: 1;
-    pointer-events: auto;
-}
-.scroll-up-btn:hover{
-    filter: brightness(90%);
-}
+    /* home section styling */
+    .home {
+      display: flex;
+      background: url("{% static 'wlpage/images/Banner.jpg' %}") no-repeat
+        center;
+      height: 100vh;
+      color: #fff;
+      min-height: 500px;
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: "Ubuntu", sans-serif;
+    }
+    .home .max-width {
+      width: 100%;
+      display: flex;
+    }
+    .home .max-width .row {
+      margin-right: 0;
+    }
+    .home .home-content .text-1 {
+      font-size: 27px;
+    }
+    .home .home-content .text-2 {
+      font-size: 75px;
+      font-weight: 600;
+      margin-left: -3px;
+    }
+    .home .home-content .text-3 {
+      font-size: 40px;
+      margin: 5px 0;
+    }
+    .home .home-content .text-3 span {
+      color: #5e7ab0;
+      font-weight: 500;
+    }
+    .home .home-content a {
+      display: inline-block;
+      background: #5e7ab0;
+      color: #00ffff !important;
+      font-size: 25px;
+      padding: 12px 36px;
+      margin-top: 20px;
+      font-weight: 400;
+      border-radius: 6px;
+      border: 2px solid #5e7ab0;
+      transition: all 0.3s ease;
+    }
+    .home .home-content a:hover {
+      color: #5e7ab0;
+      background: none;
+    }
 
+    /* about section styling */
+    .about .title::after {
+      content: "who i am";
+    }
+    .about .about-content .left {
+      width: 45%;
+    }
+    .about .about-content .left img {
+      height: 400px;
+      width: 400px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .about .about-content .right {
+      width: 55%;
+    }
+    .about .about-content .right .text {
+      font-size: 25px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .about .about-content .right .text span {
+      color: #5e7ab0;
+    }
+    .about .about-content .right p {
+      text-align: justify;
+    }
+    .about .about-content .right a {
+      display: inline-block;
+      background: #5e7ab0;
+      color: #41338f;
+      font-size: 20px;
+      font-weight: 500;
+      padding: 10px 30px;
+      margin-top: 20px;
+      border-radius: 6px;
+      border: 2px solid #5e7ab0;
+      transition: all 0.3s ease;
+    }
+    .about .about-content .right a:hover {
+      color: #5e7ab0;
+      background: none;
+    }
 
-/* home section styling */
-.home{
-    display: flex;
-    background: url("{% static 'wlpage/images/Banner.jpg' %}") no-repeat center;
-    height: 100vh;
-    color: #fff;
-    min-height: 500px;
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: 'Ubuntu', sans-serif;
-}
-.home .max-width{
-  width: 100%;
-  display: flex;
-}
-.home .max-width .row{
-  margin-right: 0;
-}
-.home .home-content .text-1{
-    font-size: 27px;
-}
-.home .home-content .text-2{
-    font-size: 75px;
-    font-weight: 600;
-    margin-left: -3px;
-}
-.home .home-content .text-3{
-    font-size: 40px;
-    margin: 5px 0;
-}
-.home .home-content .text-3 span{
-    color: #5E7AB0;
-    font-weight: 500;
-}
-.home .home-content a{
-    display: inline-block;
-    background: #5E7AB0;
-    color: #00ffff !important;
-    font-size: 25px;
-    padding: 12px 36px;
-    margin-top: 20px;
-    font-weight: 400;
-    border-radius: 6px;
-    border: 2px solid #5E7AB0;
-    transition: all 0.3s ease;
-}
-.home .home-content a:hover{
-    color: #5E7AB0;
-    background: none;
-}
+    /* services section styling */
+    .services,
+    .teams {
+      color: #fff;
+      background: #111;
+    }
+    .services .title::before,
+    .teams .title::before {
+      background: #fff;
+    }
+    .services .title::after,
+    .teams .title::after {
+      background: #111;
+      content: "my personal info";
+    }
+    .services .serv-content .card {
+      width: calc(33% - 20px);
+      background: #222;
+      text-align: center;
+      border-radius: 6px;
+      padding: 50px 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .services .serv-content .card:hover {
+      background: #5e7ab0;
+    }
+    .services .serv-content .card .box {
+      transition: all 0.3s ease;
+    }
+    .services .serv-content .card:hover .box {
+      transform: scale(1.05);
+    }
+    .services .serv-content .card i {
+      font-size: 50px;
+      color: #5e7ab0;
+      transition: color 0.3s ease;
+    }
+    .services .serv-content .card:hover i {
+      color: #fff;
+    }
+    .services .serv-content .card .text {
+      font-size: 25px;
+      font-weight: 500;
+      margin: 10px 0 7px 0;
+    }
 
-/* about section styling */
-.about .title::after{
-    content: "who i am";
-}
-.about .about-content .left{
-    width: 45%;
-}
-.about .about-content .left img{
-    height: 400px;
-    width: 400px;
-    object-fit: cover;
-    border-radius: 6px;
-}
-.about .about-content .right{
-    width: 55%;
-}
-.about .about-content .right .text{
-    font-size: 25px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-.about .about-content .right .text span{
-    color: #5E7AB0;
-}
-.about .about-content .right p{
-    text-align: justify;
-}
-.about .about-content .right a{
-    display: inline-block;
-    background: #5E7AB0;
-    color: #41338f;
-    font-size: 20px;
-    font-weight: 500;
-    padding: 10px 30px;
-    margin-top: 20px;
-    border-radius: 6px;
-    border: 2px solid #5E7AB0;
-    transition: all 0.3s ease;
-}
-.about .about-content .right a:hover{
-    color: #5E7AB0;
-    background: none;
-}
+    /* skills section styling */
 
-/* services section styling */
-.services, .teams{
-    color:#fff;
-    background: #111;
-}
-.services .title::before,
-.teams .title::before{
-    background: #fff;
-}
-.services .title::after,
-.teams .title::after{
-    background: #111;
-    content: "my personal info";
-}
-.services .serv-content .card{
-    width: calc(33% - 20px);
-    background: #222;
-    text-align: center;
-    border-radius: 6px;
-    padding: 50px 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.services .serv-content .card:hover{
-    background: #5E7AB0;
-}
-.services .serv-content .card .box{
-    transition: all 0.3s ease;
-}
-.services .serv-content .card:hover .box{
-    transform: scale(1.05);
-}
-.services .serv-content .card i{
-    font-size: 50px;
-    color: #5E7AB0;
-    transition: color 0.3s ease;
-}
-.services .serv-content .card:hover i{
-    color: #fff;
-}
-.services .serv-content .card .text{
-    font-size: 25px;
-    font-weight: 500;
-    margin: 10px 0 7px 0;
-}
+    .skills .title::after {
+      content: "what i know";
+    }
+    .skills .skills-content .column {
+      width: calc(50% - 30px);
+    }
+    .skills .skills-content .left .text {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .skills .skills-content .left p {
+      text-align: justify;
+    }
+    .skills .skills-content .left a {
+      display: inline-block;
+      background: #5e7ab0;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      padding: 8px 16px;
+      margin-top: 20px;
+      border-radius: 6px;
+      border: 2px solid #5e7ab0;
+      transition: all 0.3s ease;
+    }
+    .skills .skills-content .left a:hover {
+      color: #5e7ab0;
+      background: none;
+    }
+    .skills .skills-content .right .bars {
+      margin-bottom: 15px;
+    }
+    .skills .skills-content .right .info {
+      display: flex;
+      margin-bottom: 5px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .skills .skills-content .right span {
+      font-weight: 500;
+      font-size: 18px;
+    }
+    .skills .skills-content .right .line {
+      height: 5px;
+      width: 100%;
+      background: lightgrey;
+      position: relative;
+    }
+    .skills .skills-content .right .line::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: #5e7ab0;
+    }
+    .skills-content .right .html::before {
+      width: 90%;
+    }
+    .skills-content .right .css::before {
+      width: 60%;
+    }
+    .skills-content .right .js::before {
+      width: 80%;
+    }
+    .skills-content .right .php::before {
+      width: 50%;
+    }
+    .skills-content .right .mysql::before {
+      width: 70%;
+    }
 
-/* skills section styling */
+    /* teams section styling */
+    .teams .title::after {
+      content: "who with me";
+    }
+    .teams .carousel .card {
+      background: #222;
+      border-radius: 6px;
+      padding: 25px 35px;
+      text-align: center;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .teams .carousel .card:hover {
+      background: #5e7ab0;
+    }
+    .teams .carousel .card .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .teams .carousel .card:hover .box {
+      transform: scale(1.05);
+    }
+    .teams .carousel .card .text {
+      font-size: 25px;
+      font-weight: 500;
+      margin: 10px 0 7px 0;
+    }
+    .teams .carousel .card img {
+      height: 150px;
+      width: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #5e7ab0;
+      transition: all 0.3s ease;
+    }
+    .teams .carousel .card:hover img {
+      border-color: #fff;
+    }
+    .owl-dots {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .owl-dot {
+      height: 13px;
+      width: 13px;
+      margin: 0 5px;
+      outline: none !important;
+      border-radius: 50%;
+      border: 2px solid #5e7ab0 !important;
+      transition: all 0.3s ease;
+    }
+    .owl-dot.active {
+      width: 35px;
+      border-radius: 14px;
+    }
+    .owl-dot.active,
+    .owl-dot:hover {
+      background: #5e7ab0 !important;
+    }
 
-.skills .title::after{
-    content: "what i know";
-}
-.skills .skills-content .column{
-    width: calc(50% - 30px);
-}
-.skills .skills-content .left .text{
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-.skills .skills-content .left p{
-    text-align: justify;
-}
-.skills .skills-content .left a{
-    display: inline-block;
-    background: #5E7AB0;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 8px 16px;
-    margin-top: 20px;
-    border-radius: 6px;
-    border: 2px solid #5E7AB0;
-    transition: all 0.3s ease;
-}
-.skills .skills-content .left a:hover{
-    color: #5E7AB0;
-    background: none;
-}
-.skills .skills-content .right .bars{
-    margin-bottom: 15px;
-}
-.skills .skills-content .right .info{
-    display: flex;
-    margin-bottom: 5px;
-    align-items: center;
-    justify-content: space-between;
-}
-.skills .skills-content .right span{
-    font-weight: 500;
-    font-size: 18px;
-}
-.skills .skills-content .right .line{
-    height: 5px;
-    width: 100%;
-    background: lightgrey;
-    position: relative;
-}
-.skills .skills-content .right .line::before{
-    content: "";
-    position: absolute;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: #5E7AB0;
-}
-.skills-content .right .html::before{
-    width: 90%;
-}
-.skills-content .right .css::before{
-    width: 60%;
-}
-.skills-content .right .js::before{
-    width: 80%;
-}
-.skills-content .right .php::before{
-    width: 50%;
-}
-.skills-content .right .mysql::before{
-    width: 70%;
-}
+    /* contact section styling */
+    .contact .title::after {
+      content: "get in touch";
+    }
+    .contact .contact-content .column {
+      width: calc(50% - 30px);
+    }
+    .contact .contact-content .text {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .contact .contact-content .left p {
+      text-align: justify;
+    }
+    .contact .contact-content .left .icons {
+      margin: 10px 0;
+    }
+    .contact .contact-content .row {
+      display: flex;
+      height: 65px;
+      align-items: center;
+    }
+    .contact .contact-content .row .info {
+      margin-left: 30px;
+    }
+    .contact .contact-content .row i {
+      font-size: 25px;
+      color: #5e7ab0;
+    }
+    .contact .contact-content .info .head {
+      font-weight: 500;
+    }
+    .contact .contact-content .info .sub-title {
+      color: #333;
+    }
+    .contact .right form .fields {
+      display: flex;
+    }
+    .contact .right form .field,
+    .contact .right form .fields .field {
+      height: 45px;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .contact .right form .textarea {
+      height: 80px;
+      width: 100%;
+    }
+    .contact .right form .name {
+      margin-right: 10px;
+    }
+    .contact .right form .field input,
+    .contact .right form .textarea textarea {
+      height: 100%;
+      width: 100%;
+      border: 1px solid lightgrey;
+      border-radius: 6px;
+      outline: none;
+      padding: 0 15px;
+      font-size: 17px;
+      font-family: "Poppins", sans-serif;
+      transition: all 0.3s ease;
+    }
+    .contact .right form .field input:focus,
+    .contact .right form .textarea textarea:focus {
+      border-color: #b3b3b3;
+    }
+    .contact .right form .textarea textarea {
+      padding-top: 10px;
+      resize: none;
+    }
+    .contact .right form .button-area {
+      display: flex;
+      align-items: center;
+    }
+    .right form .button-area button {
+      color: #fff;
+      display: block;
+      width: 160px !important;
+      height: 45px;
+      outline: none;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      flex-wrap: nowrap;
+      background: #5e7ab0;
+      border: 2px solid #5e7ab0;
+      transition: all 0.3s ease;
+    }
+    .right form .button-area button:hover {
+      color: #5e7ab0;
+      background: none;
+    }
+    /* footer section styling */
+    footer {
+      background: #111;
+      padding: 15px 23px;
+      color: #fff;
+      text-align: center;
+    }
+    footer span a {
+      color: #5e7ab0;
+      text-decoration: none;
+    }
+    footer span a:hover {
+      text-decoration: underline;
+    }
 
-/* teams section styling */
-.teams .title::after{
-    content: "who with me";
-}
-.teams .carousel .card{
-    background: #222;
-    border-radius: 6px;
-    padding: 25px 35px;
-    text-align: center;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-.teams .carousel .card:hover{
-    background: #5E7AB0;
-}
-.teams .carousel .card .box{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-.teams .carousel .card:hover .box{
-    transform: scale(1.05);
-}
-.teams .carousel .card .text{
-    font-size: 25px;
-    font-weight: 500;
-    margin: 10px 0 7px 0;
-}
-.teams .carousel .card img{
-    height: 150px;
-    width: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid #5E7AB0;
-    transition: all 0.3s ease;
-}
-.teams .carousel .card:hover img{
-    border-color: #fff;
-}
-.owl-dots{
-    text-align: center;
-    margin-top: 20px;
-}
-.owl-dot{
-    height: 13px;
-    width: 13px;
-    margin: 0 5px;
-    outline: none!important;
-    border-radius: 50%;
-    border: 2px solid #5E7AB0!important;
-    transition: all 0.3s ease;
-}
-.owl-dot.active{
-    width: 35px;
-    border-radius: 14px;
-}
-.owl-dot.active,
-.owl-dot:hover{
-    background: #5E7AB0!important;
-}
-
-/* contact section styling */
-.contact .title::after{
-    content: "get in touch";
-}
-.contact .contact-content .column{
-    width: calc(50% - 30px);
-}
-.contact .contact-content .text{
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-.contact .contact-content .left p{
-    text-align: justify;
-}
-.contact .contact-content .left .icons{
-    margin: 10px 0;
-}
-.contact .contact-content .row{
-    display: flex;
-    height: 65px;
-    align-items: center;
-}
-.contact .contact-content .row .info{
-    margin-left: 30px;
-}
-.contact .contact-content .row i{
-    font-size: 25px;
-    color: #5E7AB0;
-}
-.contact .contact-content .info .head{
-    font-weight: 500;
-}
-.contact .contact-content .info .sub-title{
-    color: #333;
-}
-.contact .right form .fields{
-    display: flex;
-}
-.contact .right form .field,
-.contact .right form .fields .field{
-    height: 45px;
-    width: 100%;
-    margin-bottom: 15px;
-}
-.contact .right form .textarea{
-    height: 80px;
-    width: 100%;
-}
-.contact .right form .name{
-    margin-right: 10px;
-}
-.contact .right form .field input,
-.contact .right form .textarea textarea{
-    height: 100%;
-    width: 100%;
-    border: 1px solid lightgrey;
-    border-radius: 6px;
-    outline: none;
-    padding: 0 15px;
-    font-size: 17px;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
-}
-.contact .right form .field input:focus,
-.contact .right form .textarea textarea:focus{
-    border-color: #b3b3b3;
-}
-.contact .right form .textarea textarea{
-  padding-top: 10px;
-  resize: none;
-}
-.contact .right form .button-area{
-  display: flex;
-  align-items: center;
-}
-.right form .button-area button{
-  color: #fff;
-  display: block;
-  width: 160px!important;
-  height: 45px;
-  outline: none;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 6px;
-  cursor: pointer;
-  flex-wrap: nowrap;
-  background: #5E7AB0;
-  border: 2px solid #5E7AB0;
-  transition: all 0.3s ease;
-}
-.right form .button-area button:hover{
-  color: #5E7AB0;
-  background: none;
-}
-/* footer section styling */
-footer{
-    background: #111;
-    padding: 15px 23px;
-    color: #fff;
-    text-align: center;
-}
-footer span a{
-    color: #5E7AB0;
-    text-decoration: none;
-}
-footer span a:hover{
-    text-decoration: underline;
-}
-
-
-/* responsive media query start */
-@media (max-width: 1104px) {
-    .about .about-content .left img{
+    /* responsive media query start */
+    @media (max-width: 1104px) {
+      .about .about-content .left img {
         height: 350px;
         width: 350px;
+      }
     }
-}
 
-@media (max-width: 991px) {
-    .max-width{
+    @media (max-width: 991px) {
+      .max-width {
         padding: 0 50px;
+      }
     }
-}
-@media (max-width: 947px){
-    .menu-btn{
+    @media (max-width: 947px) {
+      .menu-btn {
         display: block;
         z-index: 999;
-    }
-    .menu-btn i.active:before{
+      }
+      .menu-btn i.active:before {
         content: "\f00d";
-    }
-    .navbar .menu{
+      }
+      .navbar .menu {
         position: fixed;
         height: 100vh;
         width: 100%;
@@ -594,317 +601,334 @@ footer span a:hover{
         text-align: center;
         padding-top: 80px;
         transition: all 0.3s ease;
-    }
-    .navbar .menu.active{
+      }
+      .navbar .menu.active {
         left: 0;
-    }
-    .navbar .menu li{
+      }
+      .navbar .menu li {
         display: block;
-    }
-    .navbar .menu li a{
+      }
+      .navbar .menu li a {
         display: inline-block;
         margin: 20px 0;
         font-size: 25px;
-    }
-    .home .home-content .text-2{
+      }
+      .home .home-content .text-2 {
         font-size: 70px;
-    }
-    .home .home-content .text-3{
+      }
+      .home .home-content .text-3 {
         font-size: 35px;
-    }
-    .home .home-content a{
+      }
+      .home .home-content a {
         font-size: 23px;
         padding: 10px 30px;
-    }
-    .max-width{
+      }
+      .max-width {
         max-width: 930px;
-    }
-    .about .about-content .column{
+      }
+      .about .about-content .column {
         width: 100%;
-    }
-    .about .about-content .left{
+      }
+      .about .about-content .left {
         display: flex;
         justify-content: center;
         margin: 0 auto 60px;
-    }
-    .about .about-content .right{
+      }
+      .about .about-content .right {
         flex: 100%;
-    }
-    .services .serv-content .card{
+      }
+      .services .serv-content .card {
         width: calc(50% - 10px);
         margin-bottom: 20px;
-    }
-    .skills .skills-content .column,
-    .contact .contact-content .column{
+      }
+      .skills .skills-content .column,
+      .contact .contact-content .column {
         width: 100%;
         margin-bottom: 35px;
+      }
     }
-}
 
-@media (max-width: 690px) {
-    .max-width{
+    @media (max-width: 690px) {
+      .max-width {
         padding: 0 23px;
-    }
-    .home .home-content .text-2{
+      }
+      .home .home-content .text-2 {
         font-size: 60px;
-    }
-    .home .home-content .text-3{
+      }
+      .home .home-content .text-3 {
         font-size: 32px;
-    }
-    .home .home-content a{
+      }
+      .home .home-content a {
         font-size: 20px;
-    }
-    .services .serv-content .card{
+      }
+      .services .serv-content .card {
         width: 100%;
+      }
     }
-}
 
-@media (max-width: 500px) {
-    .home .home-content .text-2{
+    @media (max-width: 500px) {
+      .home .home-content .text-2 {
         font-size: 50px;
-    }
-    .home .home-content .text-3{
+      }
+      .home .home-content .text-3 {
         font-size: 27px;
-    }
-    .about .about-content .right .text,
-    .skills .skills-content .left .text{
+      }
+      .about .about-content .right .text,
+      .skills .skills-content .left .text {
         font-size: 19px;
-    }
-    .contact .right form .fields{
+      }
+      .contact .right form .fields {
         flex-direction: column;
-    }
-    .contact .right form .name,
-    .contact .right form .email{
+      }
+      .contact .right form .name,
+      .contact .right form .email {
         margin: 0;
-    }
-    .right form .error-box{
-       width: 150px;
-    }
-    .scroll-up-btn{
+      }
+      .right form .error-box {
+        width: 150px;
+      }
+      .scroll-up-btn {
         right: 15px;
         bottom: 15px;
         height: 38px;
         width: 35px;
         font-size: 23px;
         line-height: 38px;
-    }
-}
-/* Style du bouton de déconnexion */
-.logout-card {
-    width: 100%;
-    background: #222;
-    text-align: center;
-    border-radius: 6px;
-    margin-top: 30px;
-}
-
-.logout-card .box {
-    padding: 25px 20px;
-}
-
-.logout-card .text button {
-    background-color: #5E7AB0;
-    color: #fff;
-    font-size: 18px;
-    padding: 10px 24px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.logout-card .text button:hover {
-    background-color: #e63946;
-    transform: scale(1.05);
-}
-.upload-btn {
-    display: inline-block;
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 10px 24px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-.upload-btn:hover {
-    background-color: #0056b3;
-}
-
-.upload-btn i {
-    margin-right: 8px;
-}
-
-
-</style>
-<body>
-  {% csrf_token %}
-  <nav class="navbar">
-    <div class="max-width">
-      <div class="logo">Cardio<span>key</span></div>
-      <ul class="menu">
-        <li><a href="#home" class="menu-btn">Home</a></li>
-        <li><a href="#about" class="menu-btn">My photo</a></li>
-        <li><a href="#services" class="menu-btn">My Information</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- home -->
-  <section class="home" id="home">
-    <div class="max-width">
-      <div class="home-content">
-        <div class="text-1">Hello, my name is</div>
-        <div class="text-2" id="nom-display">{{ info.usename }}</div>
-        <div class="text-3">and I am a user of <span class="typing">CardioKey</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- photo -->
-  <section class="about" id="about">
-    <div class="max-width">
-      <h2 class="title">My photo</h2>
-      <div class="about-content">
-        <div class="column left">
-          <img id="profile-img" src="{% static 'wlpage/images/default-user.png' %}" alt="User Photo" style="max-width: 100%;">
-        </div>
-        <div class="column right">
-          <div class="text">I'm <span id="prenom-info">{{ info.username }}</span> and I'm a verified user</div>
-          <p>This platform uses your unique heart signals (ECG) to verify your identity securely. Upload your photo to personalize your CardioKey account.</p>
-          
-          <label for="upload-photo" class="upload-btn">
-  <i class="fas fa-camera"></i> Add Photo
-</label>
-<input type="file" id="upload-photo" accept="image/*" style="display: none;">
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- info -->
-<section class="services" id="services">
-  <div class="max-width">
-    <h2 class="title">My Information</h2>
-    <div class="serv-content">
-      <!-- Nom -->
-      <div class="card">
-        <div class="box">
-          <i class="fas fa-user"></i>
-          <div class="text">First Name : <span id="prenom-info">{{ info.username }}</span> 
-          </div>
-        </div>
-      </div>
-
-      <!-- Prénom -->
-      <div class="card">
-        <div class="box">
-         
-          <i class="fas fa-user-tag"></i>
-
-          <div class="text">Last Name : <span id="nom">{{ info.name }} </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Matricule -->
-      <div class="card">
-        <div class="box">
-          <i class="fas fa-id-card"></i>
-          <div class="text">User Id : <span id="matricule">{{ info.matricule }}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Déconnexion -->
-      <div class="card logout-card">
-        <div class="box">
-          <i class="fas fa-sign-out-alt"></i>
-          <div class="text">
-             <a href="{% url 'logout' %}" class="logout" onclick="return confirm('Are you sure you want to log out?')">Log Out</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<script>
-  document.getElementById('upload-photo').addEventListener('change', function (event) {
-    const img = document.getElementById('profile-img');
-    const file = event.target.files[0];
-    if (file) {
-      img.src = URL.createObjectURL(file);
-    }
-  });
-
-  function editField(id) {
-    const span = document.getElementById(id);
-    const currentValue = span.textContent;
-    const input = prompt("Modifier la valeur :", currentValue);
-    if (input !== null && input.trim() !== "") {
-      span.textContent = input;
-      if (id === "nom") {
-        document.getElementById("nom-display").textContent = input;
       }
     }
-  }
+    /* Style du bouton de déconnexion */
+    .logout-card {
+      width: 100%;
+      background: #222;
+      text-align: center;
+      border-radius: 6px;
+      margin-top: 30px;
+    }
 
-    $(document).ready(function(){
-    $(window).scroll(function(){
-        // sticky navbar on scroll script
-        if(this.scrollY > 20){
-            $('.navbar').addClass("sticky");
-        } else {
-            $('.navbar').removeClass("sticky");
+    .logout-card .box {
+      padding: 25px 20px;
+    }
+
+    .logout-card .text button {
+      background-color: #5e7ab0;
+      color: #fff;
+      font-size: 18px;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logout-card .text button:hover {
+      background-color: #e63946;
+      transform: scale(1.05);
+    }
+    .upload-btn {
+      display: inline-block;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      padding: 10px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .upload-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .upload-btn i {
+      margin-right: 8px;
+    }
+  </style>
+  <body>
+    {% csrf_token %}
+    <nav class="navbar">
+      <div class="max-width">
+        <div class="logo">Cardio<span>key</span></div>
+        <ul class="menu">
+          <li><a href="#home" class="menu-btn">Home</a></li>
+          <li><a href="#about" class="menu-btn">My photo</a></li>
+          <li><a href="#services" class="menu-btn">My Information</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- home -->
+    <section class="home" id="home">
+      <div class="max-width">
+        <div class="home-content">
+          <div class="text-1">Hello, my name is</div>
+          <div class="text-2" id="nom-display">{{ info.usename }}</div>
+          <div class="text-3">
+            and I am a user of <span class="typing">CardioKey</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- photo -->
+    <section class="about" id="about">
+      <div class="max-width">
+        <h2 class="title">My photo</h2>
+        <div class="about-content">
+          <div class="column left">
+            <img
+              id="profile-img"
+              src="{% static 'wlpage/images/default-user.png' %}"
+              alt="User Photo"
+              style="max-width: 100%"
+            />
+          </div>
+          <div class="column right">
+            <div class="text">
+              I'm <span id="prenom-info">{{ info.username }}</span> and I'm a
+              verified user
+            </div>
+            <p>
+              This platform uses your unique heart signals (ECG) to verify your
+              identity securely. Upload your photo to personalize your CardioKey
+              account.
+            </p>
+
+            <label for="upload-photo" class="upload-btn">
+              <i class="fas fa-camera"></i> Add Photo
+            </label>
+            <input
+              type="file"
+              id="upload-photo"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- info -->
+    <section class="services" id="services">
+      <div class="max-width">
+        <h2 class="title">My Information</h2>
+        <div class="serv-content">
+          <!-- Nom -->
+          <div class="card">
+            <div class="box">
+              <i class="fas fa-user"></i>
+              <div class="text">
+                First Name : <span id="prenom-info">{{ user_first_name }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prénom -->
+          <div class="card">
+            <div class="box">
+              <i class="fas fa-user-tag"></i>
+
+              <div class="text">
+                Last Name : <span id="nom">{{ user_last_name }} </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Matricule -->
+          <div class="card">
+            <div class="box">
+              <i class="fas fa-id-card"></i>
+              <div class="text">
+                User Id : <span id="matricule">{{ user_matricule }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Déconnexion -->
+          <div class="card logout-card">
+            <div class="box">
+              <i class="fas fa-sign-out-alt"></i>
+              <div class="text">
+                <a
+                  href="{% url 'logout' %}"
+                  class="logout"
+                  onclick="return confirm('Are you sure you want to log out?')"
+                  >Log Out</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document
+        .getElementById("upload-photo")
+        .addEventListener("change", function (event) {
+          const img = document.getElementById("profile-img");
+          const file = event.target.files[0];
+          if (file) {
+            img.src = URL.createObjectURL(file);
+          }
+        });
+
+      function editField(id) {
+        const span = document.getElementById(id);
+        const currentValue = span.textContent;
+        const input = prompt("Modifier la valeur :", currentValue);
+        if (input !== null && input.trim() !== "") {
+          span.textContent = input;
+          if (id === "nom") {
+            document.getElementById("nom-display").textContent = input;
+          }
         }
+      }
 
-        // scroll-up button show/hide script
-        if(this.scrollY > 500){
-            $('.scroll-up-btn').addClass("show");
-        } else {
-            $('.scroll-up-btn').removeClass("show");
-        }
-    });
+      $(document).ready(function () {
+        $(window).scroll(function () {
+          // sticky navbar on scroll script
+          if (this.scrollY > 20) {
+            $(".navbar").addClass("sticky");
+          } else {
+            $(".navbar").removeClass("sticky");
+          }
 
-    // slide-up script
-    $('.scroll-up-btn').click(function(){
-        $('html').animate({scrollTop: 0});
-        $('html').css("scrollBehavior", "auto");
-    });
+          // scroll-up button show/hide script
+          if (this.scrollY > 500) {
+            $(".scroll-up-btn").addClass("show");
+          } else {
+            $(".scroll-up-btn").removeClass("show");
+          }
+        });
 
-    $('.navbar .menu li a').click(function(){
-        $('html').css("scrollBehavior", "smooth");
-    });
+        // slide-up script
+        $(".scroll-up-btn").click(function () {
+          $("html").animate({ scrollTop: 0 });
+          $("html").css("scrollBehavior", "auto");
+        });
 
-    // toggle menu/navbar script
-    $('.menu-btn').click(function(){
-        $('.navbar .menu').toggleClass("active");
-        $('.menu-btn i').toggleClass("active");
-    });
+        $(".navbar .menu li a").click(function () {
+          $("html").css("scrollBehavior", "smooth");
+        });
 
-    // typing text animation script (modifié)
-    var typed = new Typed(".typing", {
-        strings: ["CardioKey User"],
-        typeSpeed: 100,
-        backSpeed: 60,
-        loop: true
-    });
+        // toggle menu/navbar script
+        $(".menu-btn").click(function () {
+          $(".navbar .menu").toggleClass("active");
+          $(".menu-btn i").toggleClass("active");
+        });
 
-    // 🧹 Suppression du .typing-2 car non utilisé
-});
+        // typing text animation script (modifié)
+        var typed = new Typed(".typing", {
+          strings: ["CardioKey User"],
+          typeSpeed: 100,
+          backSpeed: 60,
+          loop: true,
+        });
 
-</script>
-
-
-
-
-</body>
+        // 🧹 Suppression du .typing-2 car non utilisé
+      });
+    </script>
+  </body>
 </html>
