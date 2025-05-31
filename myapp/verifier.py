@@ -10,10 +10,15 @@ from django.core.files.storage import default_storage
 import os
 import tempfile
 from django.core.files import File
+from django.utils import timezone
 
 FS = 250
 RADIUS = 100
 SEUIL = 0.0395
+
+MAX_ATTEMPTS = 3
+COOLDOWN_SECONDS = 30
+failed_attempts = {}
 
 
 def bandpass_filter(signal, low=0.5, high=40, fs=250, order=5):
@@ -60,6 +65,25 @@ def ecg_authentication_view(request):
                 request, "auth_form.html", {"error": "ID et fichier ECG requis."}
             )
 
+        # Check if user is in cooldown period
+        current_time = timezone.now()
+        if user_id in failed_attempts:
+            attempt_data = failed_attempts[user_id]
+            if attempt_data["count"] >= MAX_ATTEMPTS:
+                elapsed = current_time - attempt_data["last_attempt"]
+                if elapsed.total_seconds() < COOLDOWN_SECONDS:
+                    remaining = COOLDOWN_SECONDS - int(elapsed.total_seconds())
+                    return render(
+                        request,
+                        "auth_form.html",
+                        {
+                            "error": f"Trop de tentatives échouées. Veuillez attendre {remaining} secondes avant de réessayer."
+                        },
+                    )
+                else:
+                    # Reset attempts after cooldown period
+                    failed_attempts[user_id]["count"] = 0
+
         # Sauvegarder le fichier temporairement
         ecg_path = default_storage.save("tmp/" + ecg_file.name, ecg_file)
         ecg_path = os.path.join(default_storage.location, ecg_path)
@@ -99,6 +123,10 @@ def ecg_authentication_view(request):
             user = UserDB.objects.filter(matricule=matricule).first()
 
             if result == "accepté":
+                # Reset attempts on successful authentication
+                if user_id in failed_attempts:
+                    failed_attempts[user_id]["count"] = 0
+
                 # Sauvegarder le battement filtré dans MEDIA/tmp/
                 filename = f"ecg_filtered_{user_id}.txt"
                 media_tmp_path = os.path.join("tmp", filename)
@@ -134,11 +162,28 @@ def ecg_authentication_view(request):
                     },
                 )
             else:
+                # Update failed attempts counter
+                if user_id not in failed_attempts:
+                    failed_attempts[user_id] = {
+                        "count": 1,
+                        "last_attempt": current_time,
+                    }
+                else:
+                    failed_attempts[user_id]["count"] += 1
+                    failed_attempts[user_id]["last_attempt"] = current_time
+
+                attempts_left = MAX_ATTEMPTS - failed_attempts[user_id]["count"]
+                attempt_msg = ""
+                if attempts_left > 0:
+                    attempt_msg = f" Il vous reste {attempts_left} tentative(s)."
+                else:
+                    attempt_msg = f" Veuillez attendre {COOLDOWN_SECONDS} secondes avant de réessayer."
+
                 return render(
                     request,
                     "auth_form.html",
                     {
-                        "error": f"Authentification rejetée. Score : {score:.4f}, Seuil : {SEUIL}"
+                        "error": f"Authentification rejetée. Score : {score:.4f}, Seuil : {SEUIL}.{attempt_msg}"
                     },
                 )
 
