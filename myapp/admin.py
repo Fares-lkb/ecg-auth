@@ -484,12 +484,26 @@ def reset_password_admin_view(request):
     form = PasswordResetRequestForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         email = form.cleaned_data["email"]
+        role = form.cleaned_data.get("role", "staff")  # Get the role if it exists
         try:
             user = User.objects.get(email=email, is_staff=True)
             new_password = "".join(
                 random.choices(string.ascii_letters + string.digits, k=10)
             )
             user.set_password(new_password)
+
+            # Update user role if specified
+            if role == "superuser":
+                user.is_superuser = True
+            else:
+                # Make sure they're in the StaffAdmins group
+                try:
+                    group = Group.objects.get(name="StaffAdmins")
+                    user.groups.add(group)
+                except Group.DoesNotExist:
+                    group = Group.objects.create(name="StaffAdmins")
+                    user.groups.add(group)
+
             user.save()
             send_mail(
                 subject="🔐 Nouveau mot de passe admin",
@@ -499,7 +513,8 @@ def reset_password_admin_view(request):
                 fail_silently=False,
             )
             messages.success(request, "✅ Nouveau mot de passe envoyé par email.")
-            return redirect(request.path)
+            # Change this line to redirect to the admin index
+            return redirect("admin:index")
         except User.DoesNotExist:
             messages.error(request, "❌ Aucun compte admin avec cet e-mail.")
 
