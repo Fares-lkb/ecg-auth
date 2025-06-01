@@ -60,26 +60,18 @@ class CustomUserAdmin(BaseUserAdmin):
         return request.user.is_superuser
 
     def save_model(self, request, obj, form, change):
-        if not change:  # Creating a new user
-            # Ensure is_staff is set for all admin users
-            obj.is_staff = True
-
-            # If they're marked as superuser, ensure proper setup
-            if obj.is_superuser:
+        if not change:
+            if not obj.is_superuser:
+                obj.is_staff = True
                 obj.save()
-            else:
-                # Save the user first to get an ID
-                obj.save()
-                # Add to StaffAdmins group
                 try:
                     group = Group.objects.get(name="StaffAdmins")
                     obj.groups.add(group)
                 except Group.DoesNotExist:
-                    # Create the group if it doesn't exist
-                    group = Group.objects.create(name="StaffAdmins")
-                    obj.groups.add(group)
+                    pass
+            else:
+                obj.save()
         else:
-            # For existing users, just save changes
             obj.save()
 
 
